@@ -1,0 +1,4 @@
+package beal
+
+class Beal {
+}
