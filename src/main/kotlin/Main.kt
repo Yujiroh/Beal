@@ -1,7 +1,15 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import beal.Beal
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+fun main(args: Array<String>) {
+    val beal = Beal(
+        baseCondition = { it <= 2000 },
+        baseCountRange = (1..10),
+        baseExponentRange = (1..20),
+        exponentRange = (3..7),
+    )
+
+    repeat(100000000) {
+        println("------\n$it")
+        beal.randomTry()
+    }
 }

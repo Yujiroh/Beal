@@ -3,14 +3,15 @@ plugins {
     id 'application'
 }
 
-group = 'org.example'
-version = '1.0-SNAPSHOT'
-
-repositories {
-    mavenCentral()
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+    }
 }
 
 dependencies {
+    implementation 'org.jetbrains.kotlin:kotlin-stdlib'
     testImplementation 'org.jetbrains.kotlin:kotlin-test'
 }
 
@@ -28,4 +29,16 @@ compileTestKotlin {
 
 application {
     mainClassName = 'MainKt'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': "MainKt"
+    }
+    from {
+        configurations.compileClasspath.collect {
+            it.isDirectory() ? it : zipTree(it)
+        }
+    }
+
 }

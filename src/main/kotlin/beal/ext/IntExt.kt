@@ -1,4 +1,4 @@
-package ext
+package beal.ext
 
 import java.math.BigInteger
 
