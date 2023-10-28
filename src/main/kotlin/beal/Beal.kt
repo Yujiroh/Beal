@@ -19,6 +19,20 @@ class Beal(
             val value = base.pow(exponent)
             return value
         }
+
+        fun calc() {
+            val beal = Beal(
+                baseCondition = { it <= 2000 },
+                baseCountRange = (1..9),
+                baseExponentRange = (1..4),
+                exponentRange = (3..10),
+            )
+
+            repeat(10) {
+                println("------\n$it")
+                beal.randomTry()
+            }
+        }
     }
 
     init {
@@ -57,6 +71,12 @@ class Beal(
         val primitives = primitive.selectRight(baseCondition, baseCountRange.random())
         val bases = primitives.map { Pair(it, baseExponentRange.random()) }
 
+        val base = bases.map { (base, exponent) -> base.toBigInteger().pow(exponent) }.reduce { acc, bigInteger -> acc * bigInteger }
+        println("Right base=$base")
+        if (!Remainder.enable(left, base)) {
+            println("xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx")
+            return
+        }
 
         (3..Short.MAX_VALUE.toInt()).forEach { exponent ->
             val value = create(bases, exponent)
